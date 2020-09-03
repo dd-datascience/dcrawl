@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="dcrawl",
-    version="0.0.1",
+    version="0.0.2",
     author="Dongsheng Deng",
     author_email="ddswhu@outlook.com",
     description="dcrawl package to crawl data from web",

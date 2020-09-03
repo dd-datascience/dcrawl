@@ -1,6 +1,7 @@
 import requests
 from retrying import retry
 from fake_useragent import UserAgent
+from tqdm import tqdm
 ua = UserAgent()
 
 
@@ -97,3 +98,17 @@ def xpath(path_expression, source, first=True, child=False):
             print('ATTENTION: query condition is WRONG for child=False.')
             res = ''
         return res
+
+
+class DownloadProgressBar(tqdm):
+    def update_to(self, b=1, bsize=1, tsize=None):
+        if tsize is not None:
+            self.total = tsize
+        self.update(b * bsize - self.n)
+
+
+def download_file(url):
+    import urllib.request
+    file_name = url.split('/')[-1]
+    with DownloadProgressBar(unit='B', unit_scale=True, miniters=1, desc=url.split('/')[-1]) as t:
+        urllib.request.urlretrieve(url, filename=file_name, reporthook=t.update_to)
