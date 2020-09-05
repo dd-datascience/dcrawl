@@ -13,7 +13,7 @@ def _result(result):
 def requests_get(url, headers=None, proxies=None):
     if headers is None:
         headers = dict()
-    headers["user-agent"] = ua.random
+		headers["user-agent"] = ua.random
     response = requests.get(url, headers=headers, timeout=3,
                             proxies={"http:": proxies, "https": proxies},
                             allow_redirects=False)
